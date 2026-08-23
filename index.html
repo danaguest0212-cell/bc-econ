@@ -1,0 +1,316 @@
+Get index.html content to show Dana
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BC Economics 12</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background: #f0f4f8;
+            color: #2d3748;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #1a365d;
+            color: white;
+            padding: 2rem 1.5rem 1.5rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        header p {
+            margin-top: 0.3rem;
+            opacity: 0.75;
+            font-size: 0.95rem;
+        }
+
+        nav {
+            background: #2a4a7f;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #bee3f8;
+            text-decoration: none;
+            padding: 0.7rem 1.4rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            transition: background 0.15s, color 0.15s;
+        }
+
+        nav a:hover {
+            background: #1a365d;
+            color: white;
+        }
+
+        main {
+            max-width: 860px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        section {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.75rem;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        }
+
+        section h2 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1a365d;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding-bottom: 0.75rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #ebf4ff;
+        }
+
+        .table-wrap { overflow-x: auto; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+        }
+
+        thead th {
+            background: #ebf8ff;
+            color: #2c5282;
+            padding: 0.55rem 0.75rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        tbody td {
+            padding: 0.6rem 0.75rem;
+            border-bottom: 1px solid #f0f4f8;
+            vertical-align: top;
+        }
+
+        tbody tr:last-child td { border-bottom: none; }
+        tbody tr:hover td { background: #f7fafc; }
+
+        tbody tr.today td { background: #ebf8ff; }
+
+        tbody tr.today td:first-child {
+            font-weight: 700;
+            color: #2b6cb0;
+            position: relative;
+        }
+
+        tbody tr.today td:first-child::before {
+            content: "▶ ";
+            color: #3182ce;
+        }
+
+        .date-cell { white-space: nowrap; }
+        .due-cell { color: #c05621; font-weight: 500; }
+        .notes-cell { color: #718096; font-size: 0.83rem; }
+
+        .doc-group { margin-bottom: 1.25rem; }
+        .doc-group:last-child { margin-bottom: 0; }
+
+        .doc-group-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #a0aec0;
+            margin-bottom: 0.4rem;
+        }
+
+        .doc-item {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            padding: 0.45rem 0;
+            border-bottom: 1px solid #f7fafc;
+        }
+
+        .doc-item:last-child { border-bottom: none; }
+
+        .doc-item a {
+            color: #2b6cb0;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .doc-item a:hover { text-decoration: underline; }
+
+        .doc-item .doc-desc {
+            color: #a0aec0;
+            font-size: 0.82rem;
+        }
+
+        .resource-item {
+            padding: 0.45rem 0;
+            border-bottom: 1px solid #f7fafc;
+        }
+
+        .resource-item:last-child { border-bottom: none; }
+
+        .resource-item a {
+            color: #2b6cb0;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .resource-item a:hover { text-decoration: underline; }
+
+        .resource-item p {
+            font-size: 0.82rem;
+            color: #a0aec0;
+            margin-top: 0.1rem;
+        }
+
+        .empty, .loading {
+            color: #a0aec0;
+            font-style: italic;
+            font-size: 0.9rem;
+            padding: 0.5rem 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: #a0aec0;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.4rem; }
+            nav a { padding: 0.6rem 1rem; }
+            table { font-size: 0.8rem; }
+            thead th { font-size: 0.72rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>BC Economics 12</h1>
+    <p>Course Website</p>
+</header>
+
+<nav>
+    <a href="#calendar">Calendar</a>
+    <a href="#documents">Documents</a>
+    <a href="#resources">Resources</a>
+</nav>
+
+<main>
+    <section id="calendar">
+        <h2>Course Calendar</h2>
+        <div id="calendar-content"><p class="loading">Loading calendar…</p></div>
+    </section>
+
+    <section id="documents">
+        <h2>Course Documents</h2>
+        <div id="documents-content"><p class="loading">Loading documents…</p></div>
+    </section>
+
+    <section id="resources">
+        <h2>Resources</h2>
+        <div id="resources-list">
+            <p class="empty">Resources will be added soon.</p>
+        </div>
+    </section>
+</main>
+
+<footer>
+    BC Economics 12 &mdash; Updated regularly
+</footer>
+
+<script>
+    function formatDate(str) {
+        if (!str) return '';
+        const d = new Date(str + 'T12:00:00');
+        return d.toLocaleDateString('en-CA', { weekday: 'short', month: 'short', day: 'numeric' });
+    }
+
+    function isToday(str) {
+        return str === new Date().toISOString().slice(0, 10);
+    }
+
+    fetch('/data/calendar.json')
+        .then(r => r.json())
+        .then(data => {
+            const entries = (data.entries || []).slice().sort((a, b) => a.date > b.date ? 1 : -1);
+            const el = document.getElementById('calendar-content');
+            if (!entries.length) {
+                el.innerHTML = '<p class="empty">No calendar entries yet.</p>';
+                return;
+            }
+            let html = '<div class="table-wrap"><table><thead><tr><th>Date</th><th>Topic / Lesson</th><th>Due / Homework</th><th>Notes</th></tr></thead><tbody>';
+            entries.forEach(e => {
+                const cls = isToday(e.date) ? ' class="today"' : '';
+                html += `<tr${cls}>
+                    <td class="date-cell">${formatDate(e.date)}</td>
+                    <td>${e.topic || ''}</td>
+                    <td class="due-cell">${e.due || ''}</td>
+                    <td class="notes-cell">${e.notes || ''}</td>
+                </tr>`;
+            });
+            html += '</tbody></table></div>';
+            el.innerHTML = html;
+        })
+        .catch(() => {
+            document.getElementById('calendar-content').innerHTML = '<p class="empty">Calendar unavailable.</p>';
+        });
+
+    fetch('/data/documents.json')
+        .then(r => r.json())
+        .then(data => {
+            const docs = data.documents || [];
+            const el = document.getElementById('documents-content');
+            if (!docs.length) {
+                el.innerHTML = '<p class="empty">No documents uploaded yet.</p>';
+                return;
+            }
+            const groups = {};
+            docs.forEach(d => {
+                const cat = d.category || 'Other';
+                if (!groups[cat]) groups[cat] = [];
+                groups[cat].push(d);
+            });
+            let html = '';
+            Object.keys(groups).sort().forEach(cat => {
+                html += `<div class="doc-group"><div class="doc-group-label">${cat}</div>`;
+                groups[cat].forEach(d => {
+                    html += `<div class="doc-item">
+                        <a href="${d.file}" target="_blank">${d.title}</a>
+                        ${d.description ? `<span class="doc-desc">— ${d.description}</span>` : ''}
+                    </div>`;
+                });
+                html += '</div>';
+            });
+            el.innerHTML = html;
+        })
+        .catch(() => {
+            document.getElementById('documents-content').innerHTML = '<p class="empty">Documents unavailable.</p>';
+        });
+</script>
+
+</body>
+</html>
